@@ -13,7 +13,15 @@ function authMiddleware(req, res, next) {
     return res.status(401).json({ message: 'Token tidak valid atau expired.' })
   }
 }
+export const superAdminOnly = (req, res, next) => {
+  if (req.user.role !== "super_admin") {
+    return res.status(403).json({
+      message: "Akses ditolak",
+    });
+  }
 
+  next();
+};
 function adminOnly(req, res, next) {
   if (req.user?.role !== 'admin') {
     return res.status(403).json({ message: 'Akses ditolak. Admin only.' })
@@ -21,4 +29,4 @@ function adminOnly(req, res, next) {
   next()
 }
 
-module.exports = { authMiddleware, adminOnly }
+module.exports = { authMiddleware, adminOnly, superAdminOnly }
