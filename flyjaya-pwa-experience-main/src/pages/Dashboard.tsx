@@ -29,7 +29,7 @@ const TYPE_COLOR: Record<string, string> = {
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const isAdmin = user?.role === "admin";
+  const isAdmin = user?.role === "admin" || user?.role === "super_admin";
 
   const stats = useQuery({
     queryKey: ["crew-stats"],
@@ -360,7 +360,7 @@ function GroupedAlerts({ items }: { items: any[] }) {
 
   return (
     <>
-      {crews.map((crew) => {
+      {crews.map((crew: any) => {
         const isOpen = expandedIds.has(crew.employee_id);
         const worst = crew.certs.reduce((a: any, b: any) => a.days_remaining < b.days_remaining ? a : b);
         return (
