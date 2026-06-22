@@ -398,7 +398,7 @@ export function CrewCsvImport({ open, onOpenChange }: CrewCsvImportProps) {
   const mutation = useMutation({
     mutationFn: (crews: Record<string, string>[]) => {
       // Bersihkan kolom yang tidak dikenal dan normalisasi tanggal
-      const cleaned = crews.map((row) => {
+      const cleaned = crews.filter((row) =>row.name?.trim() ||row.employee_id?.trim() ||row.rank?.trim()).map((row) => {
         const obj: Record<string, string> = {};
         EXPECTED_COLS.forEach((col) => {
           const val = row[col];
