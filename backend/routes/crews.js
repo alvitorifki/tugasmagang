@@ -401,14 +401,6 @@ router.post('/bulk', authMiddleware, adminOnly, async (req, res) => {
     console.log("=== IMPORT START ===")
     console.log("TOTAL ITEMS =", req.body.crews?.length)
     console.log("FIRST ITEM =", req.body.crews?.[0])
-    crews.forEach((c, i) => {
-  console.log(
-    `ROW ${i + 1}:`,
-    c.name,
-    c.employee_id,
-    c.rank
-  );
-});
     const items = req.body.crews
     if (!Array.isArray(items) || items.length === 0)
       return res.status(400).json({ message: 'Body harus berisi array "crews".' })
