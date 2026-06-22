@@ -255,17 +255,6 @@ export default function TrainingPage() {
                     </Button>
                 </div>
             </div>
-
-            {/* ── Info box ── */}
-            <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50/60 p-4 text-sm text-blue-800 flex gap-3 items-start">
-                <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-blue-500" />
-                <div>
-                    <span className="font-semibold">Cara kerja:</span> Data training diambil otomatis dari Schedule (type = Training).
-                    Klik <b>Detail</b> untuk lihat peserta & checklist kehadiran. Klik <b>Complete Training</b>
-                    untuk menyelesaikan training dan memperbarui sertifikat semua peserta secara otomatis.
-                </div>
-            </div>
-
             {/* ── Training List ── */}
             <div className="mt-5 space-y-3">
                 {isLoading && (
