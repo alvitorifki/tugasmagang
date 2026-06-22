@@ -167,7 +167,9 @@ function parseCsv(text: string): ParseResult {
         row[h] = raw;
       }
     });
-    rows.push(row);
+    if (Object.values(row).some(v => v && v.trim() !== "")) {
+    rows.push(row)
+    }
   }
 
   const unknownCols = headers.filter(
