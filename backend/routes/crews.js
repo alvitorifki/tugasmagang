@@ -398,6 +398,10 @@ router.delete('/:id', authMiddleware, adminOnly, async (req, res) => {
 // ═══════════════════════════════════════════════════════════════
 router.post('/bulk', authMiddleware, adminOnly, async (req, res) => {
   try {
+    console.log("=== IMPORT START ===")
+    console.log("TOTAL ITEMS =", req.body.crews?.length)
+    console.log("FIRST ITEM =", req.body.crews?.[0])
+    
     const items = req.body.crews
     if (!Array.isArray(items) || items.length === 0)
       return res.status(400).json({ message: 'Body harus berisi array "crews".' })
