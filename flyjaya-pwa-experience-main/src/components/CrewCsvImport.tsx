@@ -158,19 +158,23 @@ function parseCsv(text: string): ParseResult {
   for (let i = 1; i < lines.length; i++) {
     const values = splitCsvLine(lines[i], delimiter);
     const row: Record<string, string> = {};
-    headers.forEach((h, idx) => {
-      const raw = (values[idx] ?? "").trim();
-      // Normalize tanggal di preview agar sama persis dengan yang akan di-submit
-      if (h.endsWith("_conduct") || h.endsWith("_valid") || h === "basic_indoc_conduct") {
-        row[h] = normalizeDateForApi(raw);
-      } else {
-        row[h] = raw;
-      }
-    });
-    if (Object.values(row).some(v => v && v.trim() !== "")) {
-    rows.push(row)
-    }
+   headers.forEach((h, idx) => {
+  const raw = (values[idx] ?? "").trim();
+
+  if (h.endsWith("_conduct") || h.endsWith("_valid") || h === "basic_indoc_conduct") {
+    row[h] = normalizeDateForApi(raw);
+  } else {
+    row[h] = raw;
   }
+});
+
+// WAJIB ADA DATA NAME ATAU EMPLOYEE_ID
+if (
+  row.name?.trim() &&
+  row.employee_id?.trim()
+) {
+  rows.push(row);
+}
 
   const unknownCols = headers.filter(
     (h) => !EXPECTED_COLS.includes(h) && h !== "created_at" && h !== "updated_at" && h !== "id"
