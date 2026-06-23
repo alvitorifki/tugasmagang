@@ -22,8 +22,9 @@ export function ProtectedRoute({ children, adminOnly = false }: ProtectedRoutePr
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  if (adminOnly && user?.role !== "admin") {
+  if (adminOnly && user?.role !== "admin" && user?.role !== "super_admin") {
     return <Navigate to="/" replace />;
   }
+
   return <>{children}</>;
 }

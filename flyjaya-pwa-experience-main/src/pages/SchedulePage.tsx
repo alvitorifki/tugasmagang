@@ -157,7 +157,8 @@ function downloadPdf(title: string, headers: string[], rows: string[][]) {
 
 export default function SchedulePage() {
   const { user } = useAuth();
-  const isAdmin = user?.role === "admin";
+  const isAdmin = user?.role === "admin" || user?.role === "super_admin";
+
   const qc = useQueryClient();
 
   const [cursor, setCursor] = useState<Date>(new Date());

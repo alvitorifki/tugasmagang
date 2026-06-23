@@ -109,7 +109,7 @@ function downloadCsv(filename: string, rows: string[][], headers: string[]) {
 
 export default function CrewPage() {
   const { user } = useAuth();
-  const isAdmin = user?.role === "admin";
+  const isAdmin = user?.role === "admin" || user?.role === "super_admin";
   const qc = useQueryClient();
 
   const [search, setSearch] = useState("");

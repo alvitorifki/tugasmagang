@@ -103,7 +103,9 @@ function downloadPdf(title: string, headers: string[], rows: string[][]) {
 
 export default function CertificatesPage() {
   const { user } = useAuth();
-  const isAdmin = user?.role === "admin";
+  const isAdmin = user?.role === "admin" || user?.role === "super_admin";
+
+
   const [search, setSearch] = useState("");
   const [daysFilter, setDaysFilter] = useState("90");
   const [activityQuery, setActivityQuery] = useState("");
@@ -513,7 +515,7 @@ function Section({
         {crews.length === 0 && (
           <div className="py-6 text-center text-sm text-muted-foreground">{empty}</div>
         )}
-        {crews.map((crew) => {
+        {crews.map((crew: any) => {
           const isOpen = expandedIds.has(crew.employee_id);
           // Cert paling kritis (days_remaining terkecil)
           const worst = crew.certs.reduce((a: any, b: any) => a.days_remaining < b.days_remaining ? a : b);

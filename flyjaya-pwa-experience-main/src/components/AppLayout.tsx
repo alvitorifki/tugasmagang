@@ -26,7 +26,8 @@ export function AppLayout({ children }: { children: ReactNode }) {
   const initials = (user?.name || "U")
     .split(" ").filter(Boolean).slice(0, 2).map((s) => s[0]).join("").toUpperCase();
 
-  const isAdmin = user?.role === "admin";
+  const isAdmin = user?.role === "admin" || user?.role === "super_admin";
+
 
   const visibleNavItems = navItems.filter((item) => !item.adminOnly || isAdmin);
 

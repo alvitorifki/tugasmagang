@@ -73,7 +73,8 @@ function StatusBadge({ status }: { status: string }) {
 // ─────────────────────────────────────────────────────────────
 export default function TrainingPage() {
     const { user } = useAuth();
-    const isAdmin = user?.role === "admin";
+    const isAdmin = user?.role === "admin" || user?.role === "super_admin";
+
     const qc = useQueryClient();
 
     const [cursor, setCursor] = useState<Date>(new Date());
