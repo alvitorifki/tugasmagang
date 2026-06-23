@@ -23,7 +23,7 @@ export const superAdminOnly = (req, res, next) => {
   next();
 };
 function adminOnly(req, res, next) {
-  if (req.user?.role !== 'admin') {
+  if (req.user?.role !== 'admin' && req.user?.role !== 'super_admin') {
     return res.status(403).json({ message: 'Akses ditolak. Admin only.' })
   }
   next()
